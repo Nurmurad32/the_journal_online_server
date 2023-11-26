@@ -10,7 +10,7 @@ const news = require('./data/news.json')
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('The Journal Online Server is running...!')
 })
 
 // Send category to the SERVER
@@ -32,12 +32,12 @@ app.get('/news/:id', (req, res) => {
 
 // Send News to the SERVER by id
 app.get('/category/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  if (id == 0) {
+  const id = req.params.id;
+  if (parseInt(id) === 0) {
     res.send(news)
   }
   else {
-    const selectedCategory = news.filter(n => parseInt(n.category_id) === id);
+    const selectedCategory = news.filter(n => parseInt(n.category_id) === parseInt(id));
     res.send(selectedCategory)
   }
 
